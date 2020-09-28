@@ -1,0 +1,17 @@
+[[source]]
+name = "pypi"
+url = "https://pypi.org/simple"
+verify_ssl = true
+
+[dev-packages]
+
+[packages]
+django = "*"
+playscript = {editable = true, path = "F:/Dev/Python/my_pckg/playscript"}
+psc-parse = {git = "https://github.com/satamame/psc_parse"}
+
+[requires]
+python_version = "3.8"
+
+[scripts]
+server = "python manage.py runserver"
