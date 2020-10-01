@@ -1,3 +1,7 @@
-from django.shortcuts import render
+from django.views.generic import TemplateView
 
-# Create your views here.
+
+class ScriptTop(TemplateView):
+    '''トップのメニュー画面
+    '''
+    template_name = 'script/top.html'
