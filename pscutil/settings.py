@@ -19,12 +19,6 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 
-# SECURITY WARNING: keep the secret key used in production secret!
-# Written in local_settings.py, or got from os env if deployed as product.
-
-
-ALLOWED_HOSTS = []
-
 
 # Application definition
 
@@ -121,7 +115,8 @@ STATICFILES_DIRS = [BASE_DIR / "static"]
 STATIC_ROOT = BASE_DIR / "staticfiles"
 
 
-# ローカル設定があれば開発環境、なければ本番環境
+# DEBUG mode is set if there's local settings module.
+# The settings should contain SECRET_KEY and ALLOWED_HOSTS.
 DEBUG = False
 
 try:
@@ -132,3 +127,5 @@ except ImportError:
 if not DEBUG:
     import os
     SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY')
+    hosts = os.environ.get('DJANGO_ALLOWED_HOSTS')
+    ALLOWED_HOSTS = [h.strip() for h in hosts.split(',')]
