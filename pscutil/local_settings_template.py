@@ -3,3 +3,5 @@ SECRET_KEY = 'secret-key-got-by-get_random_secret_key.py'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
+
+ALLOWED_HOSTS = []

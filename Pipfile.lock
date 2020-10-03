@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "c582f0ebd624ddc12aee1c5dadee1f7c0546c2c683f5695af0c7d1d1d8b81979"
+            "sha256": "9636cda117f629c118202d0225e32e82b45bfd8867f98fee430200eaa16b4ce8"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -26,19 +26,19 @@
         },
         "django": {
             "hashes": [
-                "sha256:59c8125ca873ed3bdae9c12b146fbbd6ed8d0f743e4cf5f5817af50c51f1fc2f",
-                "sha256:b5fbb818e751f660fa2d576d9f40c34a4c615c8b48dd383f5216e609f383371f"
+                "sha256:a2127ad0150ec6966655bedf15dbbff9697cc86d61653db2da1afa506c0b04cc",
+                "sha256:c93c28ccf1d094cbd00d860e83128a39e45d2c571d3b54361713aaaf9a94cac4"
             ],
             "index": "pypi",
-            "version": "==3.1.1"
+            "version": "==3.1.2"
         },
         "joblib": {
             "hashes": [
-                "sha256:8f52bf24c64b608bf0b2563e0e47d6fcf516abc8cfafe10cfd98ad66d94f92d6",
-                "sha256:d348c5d4ae31496b2aa060d6d9b787864dd204f9480baaa52d18850cb43e9f49"
+                "sha256:698c311779f347cf6b7e6b8a39bb682277b8ee4aba8cf9507bc0cf4cd4737b72",
+                "sha256:9e284edd6be6b71883a63c9b7f124738a3c16195513ad940eae7e3438de885d5"
             ],
             "markers": "python_version >= '3.6'",
-            "version": "==0.16.0"
+            "version": "==0.17.0"
         },
         "numpy": {
             "hashes": [
@@ -71,10 +71,6 @@
             ],
             "markers": "python_version >= '3.6'",
             "version": "==1.19.2"
-        },
-        "playscript": {
-            "editable": true,
-            "path": "F:/Dev/Python/my_pckg/playscript"
         },
         "psc-parse": {
             "git": "https://github.com/satamame/psc_parse",
@@ -164,5 +160,10 @@
             "version": "==2.1.0"
         }
     },
-    "develop": {}
+    "develop": {
+        "playscript": {
+            "editable": true,
+            "path": "F:/Dev/Python/my_pckg/playscript"
+        }
+    }
 }
