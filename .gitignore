@@ -2,8 +2,8 @@ __pycache__
 *.lnk
 *.url
 *.whl
-/.venv/
-/docs_dev/
-.vscode/
-/pscutil/local_settings.py
 *.sqlite3
+.venv/
+.vscode/
+.env
+/docs_dev/

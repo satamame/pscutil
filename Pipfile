@@ -7,7 +7,8 @@ verify_ssl = true
 playscript = {editable = true, path = "F:/Dev/Python/my_pckg/playscript"}
 
 [packages]
-django = "*"
+django = "~=3.0"
+django-environ = "*"
 psc-parse = {git = "https://github.com/satamame/psc_parse"}
 
 [requires]

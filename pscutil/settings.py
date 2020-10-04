@@ -12,12 +12,19 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 
 from pathlib import Path
 
+import environ
+
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
+env = environ.Env()
+env.read_env('.env')
+
+DEBUG = env.get_value('DEBUG', cast=bool, default=False)
+ALLOWED_HOSTS = env.list('ALLOWED_HOSTS')
+SECRET_KEY = env('SECRET_KEY')
 
 
 # Application definition
@@ -113,19 +120,3 @@ USE_TZ = True
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [BASE_DIR / "static"]
 STATIC_ROOT = BASE_DIR / "staticfiles"
-
-
-# DEBUG mode is set if there's local settings module.
-# The settings should contain SECRET_KEY and ALLOWED_HOSTS.
-DEBUG = False
-
-try:
-    from .local_settings import *
-except ImportError:
-    pass
-
-if not DEBUG:
-    import os
-    SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY')
-    hosts = os.environ.get('DJANGO_ALLOWED_HOSTS')
-    ALLOWED_HOSTS = [h.strip() for h in hosts.split(',')]
