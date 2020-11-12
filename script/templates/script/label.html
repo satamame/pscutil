@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div style="margin: 20px;">
+    <div style="display: table; width: 100%;">
+        <div style="display: table-cell; margin-left: 0;">
+            <h1>行の種類をチェックする</h1>
+        </div>
+        <div style="display: table-cell; margin-right: 0; text-align: right;">
+            <input type="button" value="もどる" />
+            &nbsp;
+            <input type="button" class="button default" value="確定してビューアへ" />
+        </div>
+    </div>
+    <form method="POST">
+    <table>
+        {% for line in lines %}
+        <tr line_num="{{ forloop.counter0 }}">
+            <td width="20px"><img src="{% static 'admin/img/icon-changelink.svg' %}" editing="0" onclick="toggleEdit(event);" style="cursor: pointer;" /></td>
+            <td width="60px"><span class="line_type" type="{{ line.0 }}" />{{ line.1 }}</span></td>
+            <td>{{ line.2 }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+    </form>
+</div>
+{% endblock %}
+
+{% block javascript %}
+<script>
+    // 行の種類の表記 (「セリフ」等) のリスト定義
+    const typeStrings = [
+    {% for str in type_strings %}    "{{ str }}"{% if not forloop.last %},{% endif %}
+    {% endfor %}];
+    
+    // 行の種類を変更する時のプルダウンのソース
+    let edit_menu = "<select>"
+    for (i = 0; i < typeStrings.length; i++) {
+        edit_menu += `<option value="${i}">${typeStrings[i]}</option>`
+    }
+    edit_menu += "</select>"
+    
+    // 各行のアイコンのクリックハンドラ (変更しない <-> 変更する)
+    function toggleEdit (e) {
+        let icon = e.currentTarget
+        let line_type = icon.parentNode.nextElementSibling.firstChild
+
+        if (icon.getAttribute('editing') == "1") {
+            icon.setAttribute("editing", "0")
+            icon.setAttribute("src", "{% static 'admin/img/icon-changelink.svg' %}")
+            line_type.innerHTML = typeStrings[line_type.getAttribute("type")];
+        } else {
+            icon.setAttribute("editing", "1")
+            icon.setAttribute("src", "{% static 'admin/img/icon-deletelink.svg' %}")
+            line_type.innerHTML = edit_menu;
+        }
+    }
+</script>
+{% endblock %}

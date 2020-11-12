@@ -10,8 +10,4 @@ class Script(models.Model):
     modify_dt = models.DateTimeField('modified', auto_now=True)
     plain_text = models.TextField('plain_text', blank=False)
     line_types = models.TextField('line_types', blank=True)
-    formatted = models.TextField('formatted', blank=True)
-    FORMAT_CHOICES = (
-        (1, 'Fountain JA'),
-    )
-    format = models.IntegerField('format', default=1, choices=FORMAT_CHOICES)
+    json = models.TextField('json', blank=True)

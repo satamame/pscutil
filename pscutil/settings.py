@@ -22,8 +22,8 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 env = environ.Env()
 env.read_env(str(BASE_DIR / '.env'))
 
-DEBUG = env.get_value('DEBUG', cast=bool, default=False)
-ALLOWED_HOSTS = env.list('ALLOWED_HOSTS', default=['*'])
+DEBUG = env.bool('DEBUG', default=False)
+ALLOWED_HOSTS = env.list('ALLOWED_HOSTS', default=[])
 SECRET_KEY = env('SECRET_KEY')
 
 
@@ -120,3 +120,11 @@ USE_TZ = True
 STATIC_URL = env('STATIC_URL', default='/static/')
 STATICFILES_DIRS = [BASE_DIR / "static"]
 STATIC_ROOT = BASE_DIR / "staticfiles"
+
+
+# psc-parse settings
+
+JUMAN_COMMAND = env('JUMAN_COMMAND', default='jumanpp_v2')
+JUMAN_OPTION = env('JUMAN_OPTION')
+PSC_PARSE_MODEL_PATH = env('PSC_PARSE_MODEL_PATH',
+    default=BASE_DIR / 'parse_model/model.pkl')
