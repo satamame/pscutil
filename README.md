@@ -11,6 +11,8 @@
 
 - You need Python 3.8 and pipenv installed.  
 Python 3.8 と pipenv をインストールしておいてください。
+- You also need Juman++ 2.0.0-rc3 installed as psc-parse is using it.  
+psc-parse を使っているので、Juman++ 2.0.0-rc3 もインストールしておく必要があります。
 
 ### Environment settings
 
