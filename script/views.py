@@ -4,7 +4,7 @@ from django.views.generic import TemplateView, FormView, DetailView
 from django.urls import reverse_lazy
 from django.conf import settings
 from django.http import HttpResponseRedirect
-from psc_parse import JumanPsc, PscClass
+from psc_parse import JumanPsc
 from psc_parse.model import predict
 
 from .models import Script
@@ -49,8 +49,8 @@ class ScriptPredict(FormView):
         '''台本テキストから行の種類を予測して改行で繋げて返す
         '''
         # 形態素解析器
-        juman = JumanPsc(command=settings.JUMAN_COMMAND,
-            option=settings.JUMAN_OPTION)
+        juman = JumanPsc(
+            command=settings.JUMAN_COMMAND, option=settings.JUMAN_OPTION)
 
         # 予測モデル
         with open(settings.PSC_PARSE_MODEL_PATH, 'rb') as f:
