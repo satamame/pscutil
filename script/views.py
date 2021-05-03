@@ -27,22 +27,22 @@ class ScriptPredict(FormView):
         # アップロードされたファイルの内容を文字列として取得する
         with request.FILES['file'].open(mode='r') as f:
             sc_text = f.read().decode()
-        
+
         # 行の種類を予測する
         line_types = self.predict_line_types(sc_text)
-        
+
         # 台本テキストと行の種類を保存する
         script = Script(
             plain_text=sc_text,
             line_types=line_types
         )
         script.save()
-        
+
         # ラベル付け画面へリダイレクトする
         token = script.token
         url = reverse_lazy('script:label', kwargs={'slug': token})
         response = HttpResponseRedirect(url)
-        
+
         return response
 
     def predict_line_types(self, sc_text):
@@ -51,15 +51,15 @@ class ScriptPredict(FormView):
         # 形態素解析器
         juman = JumanPsc(command=settings.JUMAN_COMMAND,
             option=settings.JUMAN_OPTION)
-        
+
         # 予測モデル
         with open(settings.PSC_PARSE_MODEL_PATH, 'rb') as f:
             tree = pickle.load(f)
-        
+
         # 台本を行に分けて、各行の種類を予測する
         lines = sc_text.splitlines()
         classes = predict(juman, tree, lines)
-        
+
         # 行の種類を改行文字で繋げて返す
         line_types = (str(c) for c in classes)
         return '\n'.join(line_types)
@@ -71,7 +71,7 @@ class ScriptLabel(DetailView):
     template_name = 'script/label.html'
     model = Script
     slug_field = 'token'
-    
+
     type_strings = [
         "題名",
         "著者名",
@@ -95,11 +95,14 @@ class ScriptLabel(DetailView):
         '''テンプレートに渡すパラメタを改変する
         '''
         context = super().get_context_data(**kwargs)
-        
+
+        # テキストを行ごとに分けてリストにする
         sc_lines = self.get_object().plain_text.splitlines()
+
+        # 行の種類を行ごとに分けてリストにし、可読な文字列のリストも作る
         line_types = self.get_object().line_types.splitlines()
         line_type_strs = [self.type_strings[int(t)] for t in line_types]
-        
+
         context['lines'] = zip(line_types, line_type_strs, sc_lines)
         context['type_strings'] = self.type_strings
         return context

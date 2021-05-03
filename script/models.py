@@ -1,6 +1,7 @@
 import uuid
 from django.db import models
 
+
 class Script(models.Model):
     '''Keeps script data during page transition
     '''

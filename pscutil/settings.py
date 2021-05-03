@@ -126,5 +126,6 @@ STATIC_ROOT = BASE_DIR / "staticfiles"
 
 JUMAN_COMMAND = env('JUMAN_COMMAND', default='jumanpp')
 JUMAN_OPTION = env('JUMAN_OPTION', default='')
-PSC_PARSE_MODEL_PATH = env('PSC_PARSE_MODEL_PATH',
+PSC_PARSE_MODEL_PATH = env(
+    'PSC_PARSE_MODEL_PATH',
     default=BASE_DIR / 'parse_model/model.pkl')
